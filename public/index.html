@@ -13,29 +13,8 @@
     />
   </head>
   <body class="container">
-    <h1 class="mt-5">MiniChat</h1>
+    <h1 class="mt-5">Acceso denegado</h1>
     <hr />
-    <form id="miFormulario">
-      <di class="row">
-        <div class="col-8">
-          <input
-            type="text"
-            id="txtMensaje"
-            placeholder="Mensaje"
-            class="form-control"
-          />
-        </div>
-        <div class="col-4">
-          <button class="btn btn-primary" type="submit">Enviar</button>
-        </div>
-      </di>
-    </form>
-    <div class="row">
-      <div class="col">
-        <ul id="misMensajes" class="mt-2"></ul>
-      </div>
-    </div>
-
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.1/socket.io.js"
       integrity="sha512-9mpsATI0KClwt+xVZfbcf2lJ8IFBAwsubJ6mI3rtULwyM3fBmQFzj0It4tGqxLOGQwGfJdk/G+fANnxfq9/cew=="
@@ -44,26 +23,15 @@
     ></script>
 
     <script>
+      //Conexión con el socket server
       const socket = io("https://react-socket-server-arma.herokuapp.com/");
-      const formulario = document.querySelector("#miFormulario");
-      const mensajes = document.querySelector("#misMensajes");
-      const txtmensaje = document.querySelector("#txtMensaje");
+      /// Para emitir 
+      // socket.emit('mensaje-to-server', {data});
 
-      formulario.addEventListener("submit", (ev) => {
-        ev.preventDefault();
-        const nuevoMensaje = txtMensaje.value;
-        socket.emit("mensaje-to-server", { texto: nuevoMensaje });
-      });
-
-      socket.on("mensaje-bienvenida", (data) => {
-        console.log(data);
-      });
+      //Para escuchar
       socket.on("mensaje-from-server", (data) => {
-        mensajes.innerHTML += `<li>${data.texto} </li>`;
+        //callback a ejecutar
       });
-      // setTimeout((data) => {
-      //   socket.emit("mensaje-cliente", { msg: "cliente", nombre: "Armando" });
-      // }, 2000);
     </script>
   </body>
 </html>
